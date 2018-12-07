@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 import Header from './Header';
 import Navegacion from './Navegacion';
 import Posts from './Posts';
 import SinglePost from './SinglePost';
+import Formulario from './Formulario';
 
 class Router extends Component {
     state = {
@@ -35,6 +37,24 @@ class Router extends Component {
                 this.setState({
                     posts: resultado
                 })
+            }
+        })
+    }
+    crearPost = (post) => {
+        axios.post(`https://jsonplaceholder.typecode.com/posts`, {post})
+        .then(res => {
+            if(res.status === 201) {
+                Swal(
+                    'Post creado!',
+                    'El post se ha creado correctamente!',
+                    'success'
+                  )
+                let postId = {id: res.data.id};
+                const nuevoPost = Object.assign( {}, res.data.post, postId);
+
+                this.setState(prevState => ({
+                    posts: [...prevState.posts, nuevoPost ]
+                }))
             }
         })
     }
@@ -69,7 +89,13 @@ class Router extends Component {
                                     />
                                 )
                             }}/>
-
+                            <Route exact path="/crear" render= { () => {
+                                return (
+                                    <Formulario 
+                                        crearPost={this.crearPost} />
+                                )
+                            }}
+                            />
                         </Switch>
                     </div>
                 </div>
@@ -79,3 +105,5 @@ class Router extends Component {
 }
  
 export default Router;
+
+//si quiero que sea un componente uso component={} y si quiero usar props utilizo render.

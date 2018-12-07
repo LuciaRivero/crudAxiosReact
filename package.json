@@ -24,6 +24,7 @@
   ],
   "devDependencies": {
     "axios": "^0.18.0",
-    "react-router-dom": "^4.3.1"
+    "react-router-dom": "^4.3.1",
+    "sweetalert2": "^7.31.1"
   }
 }
