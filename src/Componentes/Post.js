@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 
 
 class Post extends Component {
-    
+
     confirmarEliminacion = () => {
         const {id} = this.props.info;
         Swal({
@@ -37,6 +37,7 @@ class Post extends Component {
                 <td>{title}</td>
                 <td>
                     <Link to={`/post/${id}`} className="btn btn-primary">Ver más</Link>
+                    <Link to={`/editar/${id}`} className="btn btn-warning">Editar</Link>
                     <button onClick={this.confirmarEliminacion} className="btn btn-danger">Borrar</button>
                 </td>
             </tr>
