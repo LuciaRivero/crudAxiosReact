@@ -41,7 +41,8 @@ class Router extends Component {
         })
     }
     crearPost = (post) => {
-        axios.post(`https://jsonplaceholder.typecode.com/posts`, {post})
+        console.log('en metodo crearPost')
+        axios.post(`https://jsonplaceholder.typicode.com/posts`, {post})
         .then(res => {
             if(res.status === 201) {
                 Swal(
@@ -50,12 +51,16 @@ class Router extends Component {
                     'success'
                   )
                 let postId = {id: res.data.id};
+                //nuevo post une el data con el postId
                 const nuevoPost = Object.assign( {}, res.data.post, postId);
-
                 this.setState(prevState => ({
                     posts: [...prevState.posts, nuevoPost ]
                 }))
+                console.log(nuevoPost);
             }
+        })
+        .catch((err) => {
+              console.log('hubo un error: ', err);
         })
     }
     render() { 

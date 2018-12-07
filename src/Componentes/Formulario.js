@@ -15,6 +15,7 @@ class Formulario extends Component {
             body: this.entradaRef.current.value,
             userId: 1
         }
+        this.props.crearPost(post);
         console.log(post);
     }
     render() { 

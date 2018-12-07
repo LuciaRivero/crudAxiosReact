@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 
 
 class Post extends Component {
+    
     confirmarEliminacion = () => {
         const {id} = this.props.info;
         Swal({
